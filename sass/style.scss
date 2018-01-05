@@ -33,7 +33,7 @@ p, h1, label{
 }
 
 #content{
-	padding: 0 10px;
+	padding: 0 20px;
 }
 .content_block{
 	max-width: 750px;
@@ -179,15 +179,17 @@ input[type="checkbox"]{
 }
 
 .slider {
-    width: 102%;
+    width: 101%;
     position: relative;
-    left: -1%;
     height: 16px;
 }
 .slider_img{
 	position: absolute;
-    left: 0%;
+    left: 0px;
     cursor: pointer;
+    background: url(../img/slider.png);
+    width: 17px;
+    height: 14px;
 }
 .regulator_points{
 	width: 100%;
@@ -206,10 +208,18 @@ input[type="checkbox"]{
 }
 .regulator_items {
     width: 100%;
+    display: flex;
     position: relative;
 }
 .regulator_item {
     position: absolute;
     font-size: 13px;
-    width: 170px;
+   	max-width: 170px;
+    display: inline-block;
+}
+@media (max-width: 750px) {
+	.regulator_item{
+		max-width: 150px;
+	}
+	
 }
