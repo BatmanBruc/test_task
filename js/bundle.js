@@ -84,7 +84,6 @@ __webpack_require__(2);
 /* 2 */
 /***/ (function(module, exports) {
 
-
 function _sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return _sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }
@@ -185,8 +184,24 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
 
     if (permit_2) oldX = event.pageX;
   };
-}
+} //чекбоксы с одним варинтом
 
+{
+  var only_choice_checkbox = document.getElementsByClassName('only_choice_checkbox');
+
+  for (var i = only_choice_checkbox.length - 1; i >= 0; i--) {
+    only_choice_checkbox[i].addEventListener('click', function () {
+      var checkboxAct = document.getElementsByClassName('checked')[0];
+
+      if (checkboxAct) {
+        checkboxAct.checked = false;
+        checkboxAct.classList.remove("checked");
+      }
+
+      this.classList.add("checked");
+    });
+  }
+}
 
 /***/ })
 /******/ ]);

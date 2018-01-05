@@ -78,3 +78,17 @@
 			oldX = event.pageX;
 	}
 }
+//чекбоксы с одним варинтом
+{
+	var only_choice_checkbox = document.getElementsByClassName('only_choice_checkbox');
+	for (var i = only_choice_checkbox.length - 1; i >= 0; i--) {
+		only_choice_checkbox[i].addEventListener('click' , function () {
+			var checkboxAct = document.getElementsByClassName('checked')[0];
+			if(checkboxAct){
+				checkboxAct.checked = false;
+				checkboxAct.classList.remove("checked");
+			}
+			this.classList.add("checked");
+		});
+	}
+}
