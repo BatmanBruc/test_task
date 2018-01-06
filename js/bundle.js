@@ -105,14 +105,17 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
   };
 
   window.onresize = function () {
-    var _initDimensions = initDimensions(),
-        _initDimensions2 = _slicedToArray(_initDimensions, 6),
-        maxPx = _initDimensions2[0],
-        percent = _initDimensions2[1],
-        hf_maxPx = _initDimensions2[2],
-        hf_window = _initDimensions2[3],
-        min_maxPx = _initDimensions2[4],
-        max_maxPx = _initDimensions2[5];
+    var _initDimensions = initDimensions();
+
+    var _initDimensions2 = _slicedToArray(_initDimensions, 6);
+
+    maxPx = _initDimensions2[0];
+    percent = _initDimensions2[1];
+    hf_maxPx = _initDimensions2[2];
+    hf_window = _initDimensions2[3];
+    min_maxPx = _initDimensions2[4];
+    max_maxPx = _initDimensions2[5];
+    console.log('sdf');
   };
 
   var _initDimensions3 = initDimensions(),
@@ -201,6 +204,81 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
       this.classList.add("checked");
     });
   }
+} //Календарь
+
+{
+  var calendar = function calendar(id, year, month) {
+    var Dlast = new Date(year, month + 1, 0).getDate(),
+        D = new Date(year, month, Dlast),
+        DNlast = new Date(D.getFullYear(), D.getMonth(), Dlast).getDay(),
+        DNfirst = new Date(D.getFullYear(), D.getMonth(), 1).getDay(),
+        calendar = '<tr>',
+        month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
+    if (DNfirst != 0) {
+      for (var i = 1; i < DNfirst; i++) {
+        calendar += '<td class="day_cal">';
+      }
+    } else {
+      for (var i = 0; i < 6; i++) {
+        calendar += '<td class="day_cal">';
+      }
+    }
+
+    for (var i = 1; i <= Dlast; i++) {
+      if (i == new Date().getDate() && D.getFullYear() == new Date().getFullYear() && D.getMonth() == new Date().getMonth()) {
+        calendar += '<td class="today day_cal">' + i;
+      } else {
+        calendar += '<td class="day_cal">' + i;
+      }
+
+      if (new Date(D.getFullYear(), D.getMonth(), i).getDay() == 0) {
+        calendar += '<tr>';
+      }
+    }
+
+    for (var i = DNlast; i < 7; i++) {
+      calendar += '<td>&nbsp;';
+    }
+
+    document.querySelector('#' + id + ' tbody').innerHTML = calendar;
+    document.querySelector('#' + id + ' thead td:nth-child(2)').innerHTML = '<span id="month">' + month[D.getMonth()] + '</span>' + ' ' + '<span id="year">' + D.getFullYear() + '</span>';
+    document.querySelector('#' + id + ' thead td:nth-child(2)').dataset.month = D.getMonth();
+    document.querySelector('#' + id + ' thead td:nth-child(2)').dataset.year = D.getFullYear();
+
+    if (document.querySelectorAll('#' + id + ' tbody tr').length < 6) {
+      // чтобы при перелистывании месяцев не "подпрыгивала" вся страница, добавляется ряд пустых клеток. Итог: всегда 6 строк для цифр
+      document.querySelector('#' + id + ' tbody').innerHTML += '<tr><td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;<td>&nbsp;';
+    }
+
+    var day_cal = document.getElementsByClassName('day_cal');
+
+    for (var i = day_cal.length - 1; i >= 0; i--) {
+      day_cal[i].addEventListener('click', function () {
+        var day = this.innerHTML;
+        var month = document.getElementById('month').innerHTML;
+        var year = document.getElementById('year').innerHTML;
+        document.getElementById('date').value = day + ' ' + month + ' ' + year;
+        document.getElementById('calendar').style.display = 'none';
+      });
+    }
+  };
+
+  calendar("calendar", new Date().getFullYear(), new Date().getMonth()); // переключатель минус месяц
+
+  document.querySelector('#calendar thead tr:nth-child(1) td:nth-child(1)').onclick = function () {
+    calendar("calendar", document.querySelector('#calendar thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar thead td:nth-child(2)').dataset.month) - 1);
+  }; // переключатель плюс месяц
+
+
+  document.querySelector('#calendar thead tr:nth-child(1) td:nth-child(3)').onclick = function () {
+    calendar("calendar", document.querySelector('#calendar thead td:nth-child(2)').dataset.year, parseFloat(document.querySelector('#calendar thead td:nth-child(2)').dataset.month) + 1);
+  };
+
+  var date = document.getElementById('date');
+  date.addEventListener('focus', function () {
+    document.getElementById('calendar').style.display = 'block';
+  });
 }
 
 /***/ })
