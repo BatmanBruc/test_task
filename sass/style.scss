@@ -16,10 +16,10 @@ body{
 p, h1, label{
 	font-family: 'MyriadProRegular', sans-serif;
 }
-
+//header
 .page_file{
 	max-width: 1000px;
-	height: 1933px;
+	min-height: 1933px;
 	margin: 0 auto;
 	background: url(../img/background.jpg);
 	padding-top: 50px;
@@ -154,6 +154,7 @@ input[type="checkbox"]{
     margin-top: 0px;
     position: relative;
 }
+//круглый чекбокс
 .checkbox_icon_border{
     width: 12px;
     height: 12px;
@@ -163,7 +164,7 @@ input[type="checkbox"]{
 .checkbox_icon-circle{
 	margin-right: 17px;
 }
-.block_text_about_yourself{
+.plans_future{
 	
 	.checkbox{
 		display: inline-block;
@@ -172,12 +173,8 @@ input[type="checkbox"]{
 } 
 
 
-.date_completed {
-	.field{
-		width: 360px;
-	}	
-}
 
+//Полузнок
 .slider {
     width: 101%;
     position: relative;
@@ -222,4 +219,50 @@ input[type="checkbox"]{
 		max-width: 150px;
 	}
 	
+}
+//Дата
+.date_completed {
+	height: 219px;
+	.field{
+		width: 360px;
+		position: relative;
+		overflow: visible;
+		input{
+			    font-size: 23px;
+		}
+	}	
+}
+#calendar {
+  font: monospace;
+  line-height: 1.2em;
+  font-size: 15px;
+  text-align: center;
+  position: absolute;
+	width: 190px;
+	top: 60px;
+	left: 183px;
+	display: none;
+}
+#calendar thead tr:last-child {
+  font-size: small;
+  color: rgb(85, 85, 85);
+}
+#calendar thead tr:nth-child(1) td:nth-child(2) {
+  color: rgb(50, 50, 50);
+}
+#calendar thead tr:nth-child(1) td:nth-child(1):hover, #calendar thead tr:nth-child(1) td:nth-child(3):hover {
+  cursor: pointer;
+}
+#calendar tbody td {
+  color: rgb(44, 86, 122);
+}
+#calendar tbody td:nth-child(n+6), #calendar .holiday {
+  color: rgb(231, 140, 92);
+}
+#calendar tbody td.today {
+  background: rgb(220, 0, 0);
+  color: #fff;
+}
+.day_cal{
+	cursor: pointer;
 }
